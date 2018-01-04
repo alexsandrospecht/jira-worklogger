@@ -1,0 +1,22 @@
+<body>
+  {{> navbar}}
+</body>
+
+<template name="main_layout">
+  <div class="main-content">
+      {{> yield}}
+  </div>
+</template>
+
+<template name="navbar">
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper red lighten-2">
+        <a class="brand-logo center">Jira Worklogger</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><div class="chip"> Total de horas: 07:00</div></li>
+      </ul>
+      </div>
+    </nav>
+  </div>
+</template>
