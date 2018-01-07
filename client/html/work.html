@@ -1,28 +1,28 @@
 <template name="work">
   <div class="row">
     <div class="input-field col s2">
-      <input id="issue" type="text" class="validate">
-      <label for="issue">Issue</label>
+      <input id="issue" type="text" class="validate" value="{{issue}}">
+      <label for="issue" class="active">Issue</label>
     </div>
 
     <div class="input-field col s2">
-      <input id="inicio-date" type="text" class="datepicker">
-      <label for="inicio-date">Data Inicio</label>
+      <input id="inicio-date" type="text" class="datepicker" value="{{formatDate startDate}}">
+      <label for="inicio-date" class="active" >Data Inicio</label>
     </div>
 
     <div class="input-field col s1">
-      <input id="inicio-time" type="text" class="timepicker">
-      <label for="inicio-time">Hr</label>
+      <input id="inicio-time" type="text" class="timepicker" value="{{formatTime startDate}}">
+      <label for="inicio-time" class="active">Hr</label>
     </div>
 
     <div class="input-field col s2">
-      <input id="fim-date" type="text" class="datepicker">
-      <label for="fim-date">Data Fim</label>
+      <input id="fim-date" type="text" class="datepicker" value="{{formatDate endDate}}">
+      <label for="fim-date" class="active">Data Fim</label>
     </div>
 
     <div class="input-field col s1">
-      <input id="fim-time" type="text" class="timepicker">
-      <label for="fim-time">Hr</label>
+      <input id="fim-time" type="text" class="timepicker" value="{{formatTime endDate}}">
+      <label for="fim-time" class="active">Hr</label>
     </div>
 
     <div class="input-field col s3">

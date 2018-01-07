@@ -1,3 +1,78 @@
+import { Works } from '../../lib/collections/works.js';
+
+Template.work.events({
+  'change #issue'(event) {
+    event.preventDefault();
+    Works.update(this._id, {
+      $set: { issue: event.target.value },
+    });
+  },
+  'change #inicio-date'(event) {
+    event.preventDefault();
+    var newDate = moment(event.target.value, "DD/MM/YYYY");
+    newDate.set({hour:this.startDate.getHours(), minute:this.startDate.getMinutes()});
+
+    Works.update(this._id, {
+      $set: { startDate: newDate.toDate() },
+    });
+  },
+  'change #fim-date'(event) {
+    event.preventDefault();
+    var newDate = moment(event.target.value, "DD/MM/YYYY");
+    newDate.set({hour:this.endDate.getHours(), minute:this.endDate.getMinutes()});
+
+    Works.update(this._id, {
+      $set: { endDate: newDate.toDate() },
+    });
+  },
+  'blur #inicio-time'(event) {
+    event.preventDefault();
+
+    var valor = event.target.value;
+    if (valor.indexOf(":") != -1) {
+      var array = event.target.value.split(":");
+      var hora = array[0];
+      var minuto = array[1];
+
+      var oldDate = moment(this.startDate);
+      if (!(oldDate.hour() == hora && oldDate.minutes() == minuto)) {
+        oldDate.set({hour:hora, minute:minuto});
+
+        Works.update(this._id, {
+          $set: { startDate: oldDate.toDate() },
+        });
+      }
+    }
+  },
+  'blur #fim-time'(event) {
+    event.preventDefault();
+
+    var valor = event.target.value;
+    if (valor.indexOf(":") != -1) {
+      var array = event.target.value.split(":");
+      var hora = array[0];
+      var minuto = array[1];
+
+      var oldDate = moment(this.endDate);
+      if (!(oldDate.hour() == hora && oldDate.minutes() == minuto)) {
+        oldDate.set({hour:hora, minute:minuto});
+
+        Works.update(this._id, {
+          $set: { endDate: oldDate.toDate() },
+        });
+      }
+    }
+  }
+});
+
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('DD/MM/YYYY');
+});
+
+Template.registerHelper('formatTime', function(date) {
+  return moment(date).format('HH:mm');
+});
+
 Template.work.onRendered(function bodyOnCreated() {
   var diaSemana = [ 'Domingo', 'Segunda-Feira', 'Terca-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado' ];
   var mesAno = [ 'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro'           , 'Dezembro' ];
@@ -23,10 +98,9 @@ Template.work.onRendered(function bodyOnCreated() {
     fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
     twelvehour: false, // Use AM/PM or 24-hour format
     donetext: 'OK', // text for done-button
-    cleartext: 'Clear', // text for clear-button
-    canceltext: 'Cancel', // Text for cancel-button
-    autoclose: false, // automatic close timepicker
+    cleartext: 'Limpar', // text for clear-button
+    canceltext: 'Fechar', // Text for cancel-button
+    autoclose: true, // automatic close timepicker
     ampmclickable: true, // make AM PM clickable
-    aftershow: function(){} //Function for after opening timepicker
   });
 });
