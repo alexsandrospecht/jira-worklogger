@@ -29,3 +29,13 @@ Template.login.events({
         });
     }
 });
+
+Template.login.rendered = function () {
+  $(".container").fadeIn(1000);
+  // $(".s2class").css({"color":"#EE9BA3"});
+  // $(".s1class").css({"color":"#748194"});
+  $("#left").removeClass("left_hover");
+  $("#right").addClass("right_hover");
+  // $(".signin").css({"display":"none"});
+  // $(".signup").css({"display":""});
+};

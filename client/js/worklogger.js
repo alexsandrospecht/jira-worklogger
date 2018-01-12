@@ -1,4 +1,3 @@
-import { Session } from 'meteor/session'
 import { Works } from '../../lib/collections/works.js';
 import { UserBase } from '../../lib/collections/userBase.js';
 
@@ -25,13 +24,20 @@ Template.worklogger.events({
     var userBase = UserBase.find({user: userLogin}).fetch()[0].base;
 
     Works.find({user: userLogin}).forEach(work => {
-        Meteor.call('logWork', userBase, work.issue, '2013-09-01T10:30:18.932+0530', '1m', 'teste', (error, result) => {
-          if (error) {
-            console.log(error);
-          } else {
-            Works.remove(work._id);
-          }
-        });
+        var diff = Math.abs(work.startDate - work.endDate);
+        var minutes = Math.floor( (diff/1000) / 60);
+
+        if ( minutes > 0) {
+          var start = String(moment(work.startDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"));
+
+          Meteor.call('logWork', userBase, work.issue, start, minutes+'m', 'teste', (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+              Works.remove(work._id);
+            }
+          });
+        }
     });
   },
   'click #new_work'(event) {
