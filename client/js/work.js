@@ -105,5 +105,5 @@ Template.work.onRendered(function bodyOnCreated() {
     autoclose: true, // automatic close timepicker
     ampmclickable: true, // make AM PM clickable
   });
-  $('.tooltipped').tooltip({delay: 50});
+  $('.tooltipped').tooltip({delay: 0});
 });
