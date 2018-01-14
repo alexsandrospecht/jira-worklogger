@@ -1,5 +1,5 @@
 <template name="work">
-  <div class="row">
+  <div class="row z-depth-3 grey lighten-5" style="border-radius: 1em; padding: 0.2em;">
     <div class="input-field col s2">
       <input id="issue" type="text" class="validate" value="{{issue}}">
       <label for="issue" class="active">Issue</label>
@@ -25,13 +25,9 @@
       <label for="fim-time" class="active">Hr</label>
     </div>
 
-    <div class="input-field col s3">
-      <a class="waves-effect waves-light btn"><i class="material-icons left">comment</i>Comentário</a>
+    <div class="input-field col s4">
+      <input id="comment" type="text" value="{{comment}}">
+      <label for="comment" class="active">Comentário</label>
     </div>
-
-    <div class="input-field col s1">
-      <a id="add" class="btn btn-floating"><i class="material-icons">add</i></a>
-    </div>
-
   </div>
 </template>

@@ -6,6 +6,12 @@
   <div class="main-content">
       {{> yield}}
   </div>
+  <div class="footer grey-text text-lighten-4 right">
+    <div class="container">
+     © 2017 Jira Worklogger, All rights reserved.
+     <a class="grey-text text-lighten-4 right" href="https://github.com/alexsandrospecht/jira-worklogger">Github</a>
+    </div>
+  </div>
 </template>
 
 <template name="navbar">
@@ -14,7 +20,9 @@
       <div class="nav-wrapper" style="background-color: #2C4A64">
         <a class="brand-logo center">Jira Worklogger</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><div class="chip"> Total de horas: 07:00</div></li>
+        {{#if currentUser}}
+        <a id="logout" href="sass.html"><i class="material-icons left">publish</i>Log out</a>
+        {{/if}}
       </ul>
       </div>
     </nav>

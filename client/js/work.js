@@ -7,6 +7,12 @@ Template.work.events({
       $set: { issue: event.target.value },
     });
   },
+  'change #comment'(event) {
+    event.preventDefault();
+    Works.update(this._id, {
+      $set: { comment: event.target.value },
+    });
+  },
   'change #inicio-date'(event) {
     event.preventDefault();
     var newDate = moment(event.target.value, "DD/MM/YYYY");

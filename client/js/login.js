@@ -7,35 +7,45 @@ Template.login.events({
         var loginVar = event.target.login.value;
         var passwordVar = event.target.password.value;
 
-        if (Meteor.users.find({"username": loginVar}).count() == 0) {
-          Accounts.createUser({
-              email: loginVar,
-              password: passwordVar
-          });
-          UserBase.insert({
-              base: Base64.encode(loginVar + ':' + passwordVar),
-              user: loginVar
-          });
-        }
-
         Meteor.loginWithPassword(loginVar, passwordVar, function(error) {
-          console.log(loginVar + passwordVar);
-
             if (error) {
-                console.log(error);
+                Materialize.toast(error, 4000, 'rounded');
             } else {
                 Router.go("worklogger");
             }
         });
+    },
+    'click #register': function(event) {
+      event.preventDefault();
+      Router.go("register");
     }
 });
 
-Template.login.rendered = function () {
-  $(".container").fadeIn(1000);
-  // $(".s2class").css({"color":"#EE9BA3"});
-  // $(".s1class").css({"color":"#748194"});
-  $("#left").removeClass("left_hover");
-  $("#right").addClass("right_hover");
-  // $(".signin").css({"display":"none"});
-  // $(".signup").css({"display":""});
-};
+Template.register.events({
+    'submit form': function(event) {
+        event.preventDefault();
+        var loginVar = event.target.login.value;
+        var passwordVar = event.target.password.value;
+
+        Meteor.call('checkIfUserExists', loginVar, function (err, result) {
+           if (err) {
+               alert('There is an error while checking username');
+           } else {
+               if (result === false) {
+                 Accounts.createUser({
+                     username: loginVar,
+                     password: passwordVar
+                 });
+                 UserBase.insert({
+                     base: Base64.encode(loginVar + ':' + passwordVar),
+                     user: loginVar
+                 });
+               } else {
+                   Materialize.toast('A user with this username already exists..', 4000, 'rounded');
+               }
+           }
+       });
+
+        Router.go("/");
+    }
+});

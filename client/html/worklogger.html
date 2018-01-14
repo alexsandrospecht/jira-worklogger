@@ -8,6 +8,8 @@
     {{#each works}}
       {{> work}}
     {{/each}}
+
+    {{#if works.count}}
     <div class="row center-align">
       <div class="col s12">
         <div class="card blue-grey darken-1">
@@ -19,5 +21,6 @@
         </div>
       </div>
     </div>
+    {{/if}}
   </div>
 </template>

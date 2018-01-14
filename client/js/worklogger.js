@@ -5,7 +5,7 @@ Template.worklogger.helpers({
   works() {
     var user = Meteor.user();
     if (user) {
-        return Works.find({user: Meteor.user().emails[0].address});
+        return Works.find({user: Meteor.user().username});
     }
   },
 });
@@ -16,11 +16,8 @@ Template.body.onCreated(function bodyOnCreated() {
 });
 
 Template.worklogger.events({
-  'click #add'(event) {
-
-  },
   'click #enviar'(event) {
-    var userLogin = Meteor.user().emails[0].address;
+    var userLogin = Meteor.user().username;
     var userBase = UserBase.find({user: userLogin}).fetch()[0].base;
 
     Works.find({user: userLogin}).forEach(work => {
@@ -32,6 +29,7 @@ Template.worklogger.events({
 
           Meteor.call('logWork', userBase, work.issue, start, minutes+'m', 'teste', (error, result) => {
             if (error) {
+              Materialize.toast('Fail to log issue: '+ work.issue, 4000, 'rounded');
               console.log(error);
             } else {
               Works.remove(work._id);
@@ -45,7 +43,7 @@ Template.worklogger.events({
      issue: '',
      startDate: new Date(),
      endDate: new Date(),
-     user: Meteor.user().emails[0].address
+     user: Meteor.user().username
    });
  }
 });
