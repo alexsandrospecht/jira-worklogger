@@ -68,15 +68,11 @@ Template.work.events({
         });
       }
     }
-  }
-});
-
-Template.registerHelper('formatDate', function(date) {
-  return moment(date).format('DD/MM/YYYY');
-});
-
-Template.registerHelper('formatTime', function(date) {
-  return moment(date).format('HH:mm');
+  },
+  'click #remove'(event) {
+    event.preventDefault();
+    Works.remove(this._id);
+  },
 });
 
 Template.work.onRendered(function bodyOnCreated() {
@@ -109,4 +105,5 @@ Template.work.onRendered(function bodyOnCreated() {
     autoclose: true, // automatic close timepicker
     ampmclickable: true, // make AM PM clickable
   });
+  $('.tooltipped').tooltip({delay: 50});
 });

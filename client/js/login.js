@@ -23,29 +23,28 @@ Template.login.events({
 
 Template.register.events({
     'submit form': function(event) {
-        event.preventDefault();
-        var loginVar = event.target.login.value;
-        var passwordVar = event.target.password.value;
+      event.preventDefault();
+      var loginVar = event.target.login.value;
+      var passwordVar = event.target.password.value;
 
-        Meteor.call('checkIfUserExists', loginVar, function (err, result) {
-           if (err) {
-               alert('There is an error while checking username');
-           } else {
-               if (result === false) {
-                 Accounts.createUser({
-                     username: loginVar,
-                     password: passwordVar
-                 });
-                 UserBase.insert({
-                     base: Base64.encode(loginVar + ':' + passwordVar),
-                     user: loginVar
-                 });
-               } else {
-                   Materialize.toast('A user with this username already exists..', 4000, 'rounded');
-               }
-           }
+      Meteor.call('checkIfUserExists', loginVar, function (err, result) {
+         if (err) {
+             alert('There is an error while checking username');
+         } else {
+             if (result === false) {
+               Accounts.createUser({
+                   username: loginVar,
+                   password: passwordVar
+               });
+               UserBase.insert({
+                   base: Base64.encode(loginVar + ':' + passwordVar),
+                   user: loginVar
+               });
+             } else {
+                 Materialize.toast('A user with this username already exists..', 4000, 'rounded');
+             }
+         }
        });
-
-        Router.go("/");
+       Router.go("/");
     }
 });

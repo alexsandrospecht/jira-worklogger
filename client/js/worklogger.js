@@ -5,14 +5,9 @@ Template.worklogger.helpers({
   works() {
     var user = Meteor.user();
     if (user) {
-        return Works.find({user: Meteor.user().username});
+        return Works.find({user: Meteor.user().username}, { sort: { startDate: 1 }});
     }
   },
-});
-
-Template.body.onCreated(function bodyOnCreated() {
-  Meteor.subscribe('userBase');
-  Meteor.subscribe('works');
 });
 
 Template.worklogger.events({
@@ -24,12 +19,12 @@ Template.worklogger.events({
         var diff = Math.abs(work.startDate - work.endDate);
         var minutes = Math.floor( (diff/1000) / 60);
 
-        if ( minutes > 0) {
+        if ( minutes > 0 && work.startDate < work.endDate && work.issue) {
           var start = String(moment(work.startDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"));
 
           Meteor.call('logWork', userBase, work.issue, start, minutes+'m', 'teste', (error, result) => {
             if (error) {
-              Materialize.toast('Fail to log issue: '+ work.issue, 4000, 'rounded');
+              Materialize.toast('Fail to send issue: '+ work.issue, 4000, 'rounded');
               console.log(error);
             } else {
               Works.remove(work._id);
@@ -46,4 +41,8 @@ Template.worklogger.events({
      user: Meteor.user().username
    });
  }
+});
+
+Template.worklogger.onRendered(function bodyOnCreated() {
+  $('.tooltipped').tooltip({delay: 50});
 });

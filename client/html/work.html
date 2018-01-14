@@ -1,33 +1,44 @@
 <template name="work">
-  <div class="row z-depth-3 grey lighten-5" style="border-radius: 1em; padding: 0.2em;">
-    <div class="input-field col s2">
+  <div class="row z-depth-3 grey lighten-5 worklog" style="padding-top:1em">
+    <div class="input-field col s1">
       <input id="issue" type="text" class="validate" value="{{issue}}">
       <label for="issue" class="active">Issue</label>
     </div>
 
     <div class="input-field col s2">
       <input id="inicio-date" type="text" class="datepicker" value="{{formatDate startDate}}">
-      <label for="inicio-date" class="active" >Data Inicio</label>
+      <label for="inicio-date" class="active">Start date</label>
     </div>
 
     <div class="input-field col s1">
       <input id="inicio-time" type="text" class="timepicker" value="{{formatTime startDate}}">
-      <label for="inicio-time" class="active">Hr</label>
+      <label for="inicio-time" class="active">Time</label>
     </div>
 
     <div class="input-field col s2">
       <input id="fim-date" type="text" class="datepicker" value="{{formatDate endDate}}">
-      <label for="fim-date" class="active">Data Fim</label>
+      <label for="fim-date" class="active">End date</label>
     </div>
 
     <div class="input-field col s1">
       <input id="fim-time" type="text" class="timepicker" value="{{formatTime endDate}}">
-      <label for="fim-time" class="active">Hr</label>
+      <label for="fim-time" class="active">Time</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s1">
+      <input id="timeSpent" type="text" value="{{timeSpent startDate endDate}}" disabled>
+      <label for="timeSpent" class="active">Time spent</label>
+    </div>
+
+    <div class="input-field col s3">
       <input id="comment" type="text" value="{{comment}}">
-      <label for="comment" class="active">Comentário</label>
+      <label for="comment" class="active">Comment</label>
+    </div>
+
+    <div class="input-field col s1 center-align">
+      <a id="remove" class="btn-floating tooltipped red lighten-2" data-position="top" data-delay="50" data-tooltip="Remove worklog">
+        <i class="material-icons">delete_forever</i>
+      </a>
     </div>
   </div>
 </template>
