@@ -22,7 +22,7 @@ Template.worklogger.events({
         if ( minutes > 0 && work.startDate < work.endDate && work.issue) {
           var start = String(moment(work.startDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"));
 
-          Meteor.call('logWork', userBase, work.issue, start, minutes+'m', 'teste', (error, result) => {
+          Meteor.call('logWork', userBase, work.issue, start, minutes+'m', work.comment, (error, result) => {
             if (error) {
               Materialize.toast('Fail to send issue: '+ work.issue, 4000, 'rounded');
               console.log(error);
@@ -38,11 +38,8 @@ Template.worklogger.events({
      issue: '',
      startDate: new Date(),
      endDate: new Date(),
-     user: Meteor.user().username
+     user: Meteor.user().username,
+     comment: '',
    });
  }
-});
-
-Template.worklogger.onRendered(function bodyOnCreated() {
-  $('.tooltipped').tooltip({delay: 50});
 });
