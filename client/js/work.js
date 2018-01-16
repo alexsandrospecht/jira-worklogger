@@ -15,20 +15,10 @@ Template.work.events({
   },
   'change #inicio-date'(event) {
     event.preventDefault();
-    var newDate = moment(event.target.value, "DD/MM/YYYY");
-    newDate.set({hour:this.startDate.getHours(), minute:this.startDate.getMinutes()});
 
     Works.update(this._id, {
-      $set: { startDate: newDate.toDate() },
-    });
-  },
-  'change #fim-date'(event) {
-    event.preventDefault();
-    var newDate = moment(event.target.value, "DD/MM/YYYY");
-    newDate.set({hour:this.endDate.getHours(), minute:this.endDate.getMinutes()});
-
-    Works.update(this._id, {
-      $set: { endDate: newDate.toDate() },
+      $set: { startDate: getNewDateWithCurrentTime(event.target.value, this.startDate.getHours(), this.startDate.getMinutes(), this.startDate.getSeconds()),
+              endDate: getNewDateWithCurrentTime(event.target.value, this.endDate.getHours(), this.endDate.getMinutes(), this.endDate.getSeconds())},
     });
   },
   'blur #inicio-time'(event) {
@@ -78,6 +68,13 @@ Template.work.events({
     event.target.select();
   }
 });
+
+function getNewDateWithCurrentTime(value, hr, min, sec) {
+  var newDate = moment(value, "DD/MM/YYYY");
+  newDate.set({hour:hr, minute:min, second: sec});
+
+  return newDate.toDate();
+}
 
 Template.work.onRendered(function bodyOnCreated() {
   $(".time").inputmask("hh:mm");

@@ -1,6 +1,6 @@
 <template name="work">
   <div class="row z-depth-3 grey lighten-5 worklog" style="padding-top:1em">
-    <div class="input-field col s1">
+    <div class="input-field col s2">
       <input id="issue" type="text" class="validate" value="{{issue}}">
       <label for="issue" class="active">Issue</label>
     </div>
@@ -12,17 +12,12 @@
 
     <div class="input-field col s1">
       <input id="inicio-time" class="time" type="text" value="{{formatTime startDate}}">
-      <label for="inicio-time" class="active">Time</label>
-    </div>
-
-    <div class="input-field col s2">
-      <input id="fim-date" type="text" class="datepicker" value="{{formatDate endDate}}">
-      <label for="fim-date" class="active">End date</label>
+      <label for="inicio-time" class="active">Start time</label>
     </div>
 
     <div class="input-field col s1">
       <input id="fim-time" type="text" class="time" value="{{formatTime endDate}}">
-      <label for="fim-time" class="active">Time</label>
+      <label for="fim-time" class="active">End time</label>
     </div>
 
     <div class="input-field col s1">
@@ -30,7 +25,7 @@
       <label for="timeSpent" class="active">Time spent</label>
     </div>
 
-    <div class="input-field col s3">
+    <div class="input-field col s4">
       <input id="comment" type="text" value="{{comment}}">
       <label for="comment" class="active">Comment</label>
     </div>

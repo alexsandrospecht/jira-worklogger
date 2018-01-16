@@ -5,7 +5,7 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
-  logWork(userBase, issue, startedTime, tempoGasto, comentario) {
+  'logWork': function (userBase, issue, startedTime, tempoGasto, comentario) {
 
     try {
       var response = HTTP.call('POST', Meteor.settings.jiraUrl + '/rest/api/2/issue/'+ issue + '/worklog', {
@@ -15,13 +15,12 @@ Meteor.methods({
           'Authorization': 'Basic ' + userBase
         }
       });
-
       return response;
-    }
-    catch(err) {
-       return err
-    }
 
+    } catch (err) {
+      console.log(err);
+      return err
+    }
   },
   'checkIfUserExists': function (username) {
       return (Meteor.users.findOne({username: username})) ? true : false;
