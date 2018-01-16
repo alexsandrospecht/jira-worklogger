@@ -72,12 +72,15 @@ Template.work.events({
   'click #remove'(event) {
     event.preventDefault();
     Works.remove(this._id);
+  },
+  'focus .time'(event) {
+    event.preventDefault();
+    event.target.select();
   }
 });
 
 Template.work.onRendered(function bodyOnCreated() {
-  $("#fim-time").inputmask("hh:mm");
-  $("inicio-time").inputmask("hh:mm");
+  $(".time").inputmask("hh:mm");
 
   $(".datepicker").pickadate({
     selectMonths: true,
@@ -86,4 +89,5 @@ Template.work.onRendered(function bodyOnCreated() {
     format: 'dd/mm/yyyy',
     closeOnSelect: true
   });
+
 });
