@@ -57,6 +57,7 @@ logging@1.1.19
 materialize:materialize@0.100.2
 meteor@1.8.2
 meteor-base@1.2.0
+meteorhacks:async@1.0.0
 meteortoys:allthings@4.0.0
 meteortoys:authenticate@4.0.0
 meteortoys:autopub@4.0.0

@@ -6,21 +6,24 @@ Meteor.startup(() => {
 
 Meteor.methods({
   logWork(userBase, issue, startedTime, tempoGasto, comentario) {
-    HTTP.call('POST', Meteor.settings.jiraUrl + '/rest/api/2/issue/'+ issue + '/worklog', {
-      data: { timeSpent: tempoGasto, started: startedTime, comment: comentario},
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + userBase
-      }
-    }, (error, result) => {
-        console.log(error);
-        console.log(result);
-    });
-  }
-});
 
-Meteor.methods({
-    'checkIfUserExists': function (username) {
-        return (Meteor.users.findOne({username: username})) ? true : false;
+    try {
+      var response = HTTP.call('POST', Meteor.settings.jiraUrl + '/rest/api/2/issue/'+ issue + '/worklog', {
+        data: { timeSpentSeconds: tempoGasto, started: startedTime, comment: comentario},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + userBase
+        }
+      });
+
+      return response;
     }
+    catch(err) {
+       return err
+    }
+
+  },
+  'checkIfUserExists': function (username) {
+      return (Meteor.users.findOne({username: username})) ? true : false;
+  }
 });

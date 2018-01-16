@@ -17,17 +17,22 @@ Template.worklogger.events({
 
     Works.find({user: userLogin}).forEach(work => {
         var diff = Math.abs(work.startDate - work.endDate);
-        var minutes = Math.floor( (diff/1000) / 60);
+        var seconds = Math.floor( (diff/1000));
 
-        if ( minutes > 0 && work.startDate < work.endDate && work.issue) {
+        if ( seconds > 0 && work.startDate < work.endDate && work.issue) {
           var start = String(moment(work.startDate).utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"));
 
-          Meteor.call('logWork', userBase, work.issue, start, minutes+'m', work.comment, (error, result) => {
+          Meteor.call('logWork', userBase, work.issue, start, seconds, work.comment, (error, result) => {
             if (error) {
               Materialize.toast('Fail to send issue: '+ work.issue, 4000, 'rounded');
               console.log(error);
             } else {
-              Works.remove(work._id);
+              if (result.statusCode != 201) {
+                Materialize.toast('Fail to send issue: '+ result.response.statusCode + " " + result.response.data.errorMessages[0], 4000, 'rounded');
+                console.log(result);
+              } else {
+                Works.remove(work._id);
+              }
             }
           });
         }
