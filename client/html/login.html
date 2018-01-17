@@ -38,7 +38,8 @@
                   </form>
                   <div class="row">
                       <div class="col m12">
-                        <a id="register" class="waves-effect waves-teal btn-flat">Register</a>
+                        <a id="register" class="waves-effect waves-teal btn-flat">Register</a><br>
+                        <a id="forgotPass" class="waves-effect waves-teal btn-flat">Forgot your password?</a>
                       </div>
                   </div>
               </div>
@@ -59,6 +60,12 @@
                   <form class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
+                              <input id="email" type="email" class="validate">
+                              <label for="email">E-mail</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="input-field col s12">
                               <input id="login" type="text" class="validate">
                               <label for="login">Login</label>
                           </div>
@@ -77,5 +84,41 @@
                   </form>
               </div>
           </div>
+      </div>
+</template>
+
+<template name="resetpass">
+      <div class="row">
+        <div class="section"></div>
+        <div class="section"></div>
+          <div class="col s12 m4 offset-m4 center-align z-depth-1 grey lighten-4">
+            <div class="section"></div>
+            <div class="section"></div>
+            <img src="/images/spruce.png" style="width: 25%;">
+              <div class="row">
+                  <form class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="email" type="email" class="validate">
+                              <label for="email">E-mail</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col m12">
+                            <button id="forgot" class="btn btn-large waves-effect waves-light" type="button">Send E-mail</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>E-mail Sent!</h4>
+          <p>Check your mailbox!</p>
+        </div>
+        <div class="modal-footer">
+          <a href="/" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
       </div>
 </template>

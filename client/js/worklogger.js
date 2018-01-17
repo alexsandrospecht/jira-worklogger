@@ -28,7 +28,7 @@ Template.worklogger.events({
               console.log(error);
             } else {
               if (result.statusCode != 201) {
-                Materialize.toast('Fail to send issue: '+ result.response.statusCode + " " + result.response.data.errorMessages[0], 4000, 'rounded');
+                Materialize.toast('Fail to send issue: '+ work.issue + ". Error code: " + result.response.statusCode, 4000, 'rounded');
                 console.log(result);
               } else {
                 Works.remove(work._id);

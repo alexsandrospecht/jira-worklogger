@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
-
+  process.env.MAIL_URL = Meteor.settings.email;
 });
 
 Meteor.methods({
@@ -19,6 +19,10 @@ Meteor.methods({
 
     } catch (err) {
       console.log(err);
+
+      // if (err && err.statusCode) {
+      //    throw new Meteor.Error(err.statusCode, 'There was an error processing your request' );
+      // }
       return err
     }
   },
