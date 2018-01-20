@@ -57,7 +57,7 @@ Template.register.events({
   'click #forgotPass' : function(event) {
     var email = $('#email')[0].value
 
-    if (email == "") {
+    if (email === "") {
       Materialize.toast('Empty e-mail field!', 4000);
       return;
     }
@@ -78,7 +78,7 @@ Template.resetpass.events({
   'click #forgot' : function(event) {
     var email = $('#email')[0].value
 
-    if (email == "") {
+    if (email === "") {
       Materialize.toast('Empty e-mail field!', 4000);
       return;
     }

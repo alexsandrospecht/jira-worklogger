@@ -8,6 +8,17 @@ Template.worklogger.helpers({
         return Works.find({user: Meteor.user().username}, { sort: { startDate: 1 }});
     }
   },
+  dateWithLog() {
+    var user = Meteor.user();
+    if (user) {
+      var groups = _.groupBy(Works.find({user: Meteor.user().username}, { sort: { startDate: 1 }}).fetch(), function (item) {
+        console.log();
+        return item.startDate.withoutTime();
+      });
+
+      return _.toArray(groups);
+    }
+  }
 });
 
 Template.worklogger.events({

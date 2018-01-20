@@ -31,7 +31,7 @@ Template.work.events({
       var minuto = array[1];
 
       var oldDate = moment(this.startDate);
-      if (!(oldDate.hour() == hora && oldDate.minutes() == minuto)) {
+      if (!(oldDate.hour() === hora && oldDate.minutes() === minuto)) {
         oldDate.set({hour:hora, minute:minuto});
 
         Works.update(this._id, {
@@ -50,7 +50,7 @@ Template.work.events({
       var minuto = array[1];
 
       var oldDate = moment(this.endDate);
-      if (!(oldDate.hour() == hora && oldDate.minutes() == minuto)) {
+      if (!(oldDate.hour() === hora && oldDate.minutes() === minuto)) {
         oldDate.set({hour:hora, minute:minuto});
 
         Works.update(this._id, {

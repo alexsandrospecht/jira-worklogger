@@ -37,21 +37,21 @@ Template.registerHelper('timeSpent', function(start, end) {
   return timeConvert(min);
 });
 
-Template.registerHelper('getTotalTime', function(start, end) {
-  var user = Meteor.user();
-  if (user) {
-      var minutes = 0;
+Date.prototype.withoutTime = function () {
+    var d = new Date(this);
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
 
-      Works.find({user: Meteor.user().username}, { sort: { startDate: 1 }}).forEach(function(item) {
-        if (item.startDate < item.endDate) {
-          var diff = Math.abs(item.startDate - item.endDate);
-          minutes += Math.floor( (diff / 1000) / 60);
-        }
-      });
-      return timeConvert(minutes);
-  }
+Template.registerHelper('getTotalTime', function(args) {
+  var total = 0;
 
-  return "00:00";
+  args.forEach(function (val) {
+    var diff = Math.abs(val.startDate - val.endDate);
+    total+= Math.floor( (diff / 1000) / 60);
+  });
+
+  return moment(args[0].startDate).format('DD/MM/YYYY') + ' - ' + timeConvert(total);
 });
 
 function timeConvert(n) {
