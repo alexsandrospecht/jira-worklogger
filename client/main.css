@@ -1,6 +1,8 @@
 /* CSS declarations go here */
 body {
-	background-image:url('/images/body.jpg');
+  background-image:url('/images/body.jpg');
+  font-family:Roboto;
+  font-weight: 200;
 }
 
 .footer {
@@ -19,4 +21,16 @@ body {
 .worklog {
   border-radius: 0.5em;
   padding: 0.2em;
+}
+
+h4 {
+  color:#3E7089;
+}
+
+.autocomplete-content {
+  position: absolute;
+}
+
+.dropdown-content {
+  min-width: 100vh;
 }

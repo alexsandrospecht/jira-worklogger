@@ -1,8 +1,13 @@
 import { Works } from '../../lib/collections/works.js';
+import { UserBase } from '../../lib/collections/userBase.js';
 
 Template.work.events({
   'change #issue'(event) {
     event.preventDefault();
+    if (event.target.value.indexOf(" - ") !== -1 ) {
+      event.target.value = event.target.value.split(" - ")[0];
+    }
+
     Works.update(this._id, {
       $set: { issue: event.target.value },
     });
@@ -85,6 +90,17 @@ Template.work.onRendered(function bodyOnCreated() {
     clear: false,
     format: 'dd/mm/yyyy',
     closeOnSelect: true
-  });
+  }); 
 
+  Meteor.call('getUserIssues', UserBase.find({user: Meteor.user().username}).fetch()[0].base, (error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      $('input.autocomplete').autocomplete({
+        data: result,
+        limit: 10,
+        minLength: 0,
+      });
+    }
+  });
 });

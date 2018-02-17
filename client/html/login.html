@@ -1,124 +1,149 @@
 <template name="login">
     {{#if currentUser}}
-      <div class="row">
+    <div class="row">
         <div class="section"></div>
         <div class="section"></div>
         <div class="section"></div>
         <div class="col m12 center-align">
-          <a class="pulse btn z-depth-5" href="/worklogger"><i class="material-icons left">access_time</i>Start</a>
+        <a class="pulse btn z-depth-5" href="/worklogger"><i class="material-icons left">access_time</i>Start</a>
         </div>
-      </div>
+    </div>
     {{else}}
-      <div class="row">
-        <div class="section"></div>
-        <div class="section"></div>
-          <div class="col s12 m4 offset-m4 center-align z-depth-5 grey lighten-4">
+    <div class="container">  
+        <div class="row">
             <div class="section"></div>
             <div class="section"></div>
-            <img src="/images/spruce.png" style="width: 25%;">
-              <div class="row">
-                  <form class="col s12">
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="login" type="text" class="validate">
-                              <label for="login">Login</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="password" type="password" class="validate">
-                              <label for="password">Password</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col m12">
-                            <button class="btn btn-large waves-effect waves-light" type="submit">Login</button>
-                          </div>
-                      </div>
-                  </form>
-                  <div class="row">
-                      <div class="col m12">
-                        <a id="register" class="waves-effect waves-teal btn-flat">Register</a><br>
-                        <a id="forgotPass" class="waves-effect waves-teal btn-flat">Forgot your password?</a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+            <div class="col s12 m4 offset-m4 center-align z-depth-5 grey lighten-4">
+                <div class="section"></div>
+
+                <div class="row">
+                    <h4> Sign In </h4>
+                </div>
+
+                <div class="row">
+                    <form class="col s10 offset-m1">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="login" type="text" class="validate">
+                                <label for="login">Login</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" type="password" class="validate">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <button class="btn btn-large waves-effect waves-light" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col m12">
+                            <a id="register" class="waves-effect waves-teal btn-flat">Register</a><br>
+                            <a id="forgotPass" class="waves-effect waves-teal btn-flat">Forgot your password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{/if}}
 </template>
 
 <template name="register">
-      <div class="row">
-        <div class="section"></div>
-        <div class="section"></div>
-          <div class="col s12 m4 offset-m4 center-align z-depth-1 grey lighten-4">
+    <div class="container">  
+        <div class="row">
             <div class="section"></div>
             <div class="section"></div>
-            <img src="/images/spruce.png" style="width: 25%;">
-              <div class="row">
-                  <form class="col s12">
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="email" type="email" class="validate">
-                              <label for="email">E-mail</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="login" type="text" class="validate">
-                              <label for="login">Login</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="password" type="password" class="validate">
-                              <label for="password">Password</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col m12">
-                            <button class="btn btn-large waves-effect waves-light" type="submit">Register</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+            <div class="col s12 m4 offset-m4 center-align z-depth-1 grey lighten-4">
+                <div class="section"></div>
+                
+                <div class="row">
+                    <h4> Create your account </h4>
+                </div>
+
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10 offset-m1">
+                                <input id="email" type="email" class="validate">
+                                <label for="email">E-mail</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-m1">
+                                <input id="login" type="text" class="validate">
+                                <label for="login">Login</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-m1">
+                                <input id="password" type="password" class="validate">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <button class="btn btn-large waves-effect waves-light" type="submit">Register</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col m12">
+                                    <a href="/" class="modal-action modal-close waves-effect waves-green btn-flat">Back</a>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="resetpass">
-      <div class="row">
-        <div class="section"></div>
-        <div class="section"></div>
-          <div class="col s12 m4 offset-m4 center-align z-depth-1 grey lighten-4">
+    <div class="container">  
+        <div class="row">
             <div class="section"></div>
             <div class="section"></div>
-            <img src="/images/spruce.png" style="width: 25%;">
-              <div class="row">
-                  <form class="col s12">
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="email" type="email" class="validate">
-                              <label for="email">E-mail</label>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col m12">
-                            <button id="forgot" class="btn btn-large waves-effect waves-light" type="button">Send E-mail</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-      <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h4>E-mail Sent!</h4>
-          <p>Check your mailbox!</p>
+            <div class="col s12 m4 offset-m4 center-align z-depth-1 grey lighten-4">
+                <div class="section"></div>
+
+                <div class="row">
+                        <h4> Reset your password </h4>
+                </div>
+
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10 offset-m1">
+                                <input id="email" type="email" class="validate">
+                                <label for="email">E-mail</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <button id="forgot" class="btn btn-large waves-effect waves-light" type="button">Send E-mail</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col m12">
+                                    <a href="/" class="modal-action modal-close waves-effect waves-green btn-flat">Back</a>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-          <a href="/" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+            <h4>E-mail Sent!</h4>
+            <p>Check your mailbox!</p>
+            </div>
+            <div class="modal-footer">
+            <a href="/" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+            </div>
         </div>
-      </div>
+    </div>
 </template>

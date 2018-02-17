@@ -27,6 +27,13 @@ Meteor.methods({
     }
   },
   'checkIfUserExists': function (username) {
-      return (Meteor.users.findOne({username: username})) ? true : false;
+    return (Meteor.users.findOne({username: username})) ? true : false;
+  },
+  'getUserIssues': function () {
+    var data = {
+      "SA-9999 - Sua issue 1": null,
+      "SA-9811 - Sua issue 2": null
+    };
+    return data;     
   }
 });
