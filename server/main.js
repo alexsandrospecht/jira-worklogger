@@ -29,11 +29,13 @@ Meteor.methods({
   'checkIfUserExists': function (username) {
     return (Meteor.users.findOne({username: username})) ? true : false;
   },
-  'getUserIssues': function () {
-    var data = {
-      "SA-9999 - Sua issue 1": null,
-      "SA-9811 - Sua issue 2": null
-    };
-    return data;     
+  'getUserIssues': function (userBase) {
+    var response = HTTP.call('GET', Meteor.settings.jiraUrl + '/rest/api/2/search?jql=filter="' + Meteor.settings.filter + '"', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + userBase
+      }
+    });
+    return response;
   }
 });

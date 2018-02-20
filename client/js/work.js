@@ -90,14 +90,21 @@ Template.work.onRendered(function bodyOnCreated() {
     clear: false,
     format: 'dd/mm/yyyy',
     closeOnSelect: true
-  }); 
+  });
 
   Meteor.call('getUserIssues', UserBase.find({user: Meteor.user().username}).fetch()[0].base, (error, result) => {
     if (error) {
       console.log(error);
     } else {
+      var output = {};
+
+      for (var k in result['data']['issues']) {
+        var issue = result['data']['issues'][k];
+        output[issue['key'] + " - " + issue['fields']['summary']] = null;
+      }
+
       $('input.autocomplete').autocomplete({
-        data: result,
+        data: output,
         limit: 10,
         minLength: 0,
       });
