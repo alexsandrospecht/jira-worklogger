@@ -7,12 +7,33 @@ Template.login.events({
         var loginVar = event.target.login.value;
         var passwordVar = event.target.password.value;
 
-        Meteor.loginWithPassword(loginVar, passwordVar, function(error) {
-            if (error) {
+        // Meteor.loginWithPassword(loginVar, passwordVar, function(error) {
+        //     if (error) {
+        //         Materialize.toast(error, 4000, 'rounded');
+        //     } else {
+        //         Router.go("worklogger");
+        //     }
+        // });
+
+        Meteor.call('getDn', function (err, result) {
+          if (err) {
+            alert('There is an error loading LDAP dn.');
+          } else {
+            Meteor.loginWithLDAP(loginVar, passwordVar, { dn: "uid="+ loginVar + result }, function (error, success) {
+              if (error) {
+                console.log(error);
                 Materialize.toast(error, 4000, 'rounded');
-            } else {
+              } else {
+                if (!UserBase.findOne({user: loginVar , note:{"$exists":true}})) {
+                  UserBase.insert({
+                    base: Base64.encode(loginVar + ':' + passwordVar),
+                    user: loginVar
+                  });
+                }
                 Router.go("worklogger");
-            }
+              };
+            });
+          }
         });
     },
     'click #register': function(event) {

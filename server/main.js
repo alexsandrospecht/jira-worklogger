@@ -2,6 +2,10 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
   process.env.MAIL_URL = Meteor.settings.email;
+
+  LDAP_DEFAULTS.url = Meteor.settings.ldapUrl;
+  LDAP_DEFAULTS.dn = Meteor.settings.dn;
+  LDAP_DEFAULTS.port = Meteor.settings.ldapPort;
 });
 
 Meteor.methods({
@@ -28,6 +32,9 @@ Meteor.methods({
   },
   'checkIfUserExists': function (username) {
     return (Meteor.users.findOne({username: username})) ? true : false;
+  },
+  'getDn': function () {
+    return Meteor.settings.dn;
   },
   'getUserIssues': function (userBase) {
     var response = HTTP.call('GET', Meteor.settings.jiraUrl + '/rest/api/2/search?jql=filter="' + Meteor.settings.filter + '"', {
