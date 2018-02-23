@@ -1,19 +1,35 @@
 import { UserBase } from '../../lib/collections/userBase.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
-Template.login.events({
+Template.loginAccount.events({
     'submit form': function(event) {
         event.preventDefault();
         var loginVar = event.target.login.value;
         var passwordVar = event.target.password.value;
 
-        // Meteor.loginWithPassword(loginVar, passwordVar, function(error) {
-        //     if (error) {
-        //         Materialize.toast(error, 4000, 'rounded');
-        //     } else {
-        //         Router.go("worklogger");
-        //     }
-        // });
+        Meteor.loginWithPassword(loginVar, passwordVar, function(error) {
+            if (error) {
+                Materialize.toast(error, 4000, 'rounded');
+            } else {
+                Router.go("worklogger");
+            }
+        });
+    },
+    'click #register': function(event) {
+      event.preventDefault();
+      Router.go("register");
+    },
+    'click #forgotPass': function(event) {
+      event.preventDefault();
+      Router.go("resetpass");
+    }
+});
+
+Template.loginLDAP.events({
+    'submit form': function(event) {
+        event.preventDefault();
+        var loginVar = event.target.login.value;
+        var passwordVar = event.target.password.value;
 
         Meteor.call('getDn', function (err, result) {
           if (err) {
@@ -35,15 +51,11 @@ Template.login.events({
             });
           }
         });
-    },
-    'click #register': function(event) {
-      event.preventDefault();
-      Router.go("register");
-    },
-    'click #forgotPass': function(event) {
-      event.preventDefault();
-      Router.go("resetpass");
     }
+});
+
+Template.login.onRendered(function bodyOnCreated() {
+  $('ul.tabs').tabs();
 });
 
 Template.register.events({
