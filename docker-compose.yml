@@ -1,0 +1,31 @@
+version: '2.1'
+volumes:
+  data:
+    external:
+      name: localmongo
+services:
+  database:
+    image: mongo:latest
+    command: mongod --smallfiles
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "echo", "show dbs", "|", "mongo"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - data:/data/db
+  jira-worklogger:
+    image: alexsandrospecht/jiraworklogger
+    ports:
+      - "80:80"
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://database:27017/jiraworklogger
+      - 'METEOR_SETTINGS={"jiraUrl":"http://yourcompanyjira.com","filter":"YourJiraFilter","email":"smtps://mail@gmail.com:password@smtp.gmail.com:465/","ldapUrl":"ldap://ldap.yourcompany.com","ldapPort":"389","dn":",ou=Users,dc=xxx,dc=xxx,dc=xxx"}'
+    depends_on:
+      database:
+        condition: service_healthy
+    links:
+      - database
