@@ -30,4 +30,4 @@ http
 ostrio:base64
 bigdsk:inputmask
 meteorhacks:async
-alexsandrospecht:accounts-ldap
+typ:accounts-ldap
