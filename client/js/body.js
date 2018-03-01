@@ -10,6 +10,10 @@ Template.body.events({
     Meteor.logout(function(err) {
       console.log(err);
     });
+  },
+  'click #refreshJiraIssues'(event) {
+    event.preventDefault();
+    loadUserIssues();
   }
 });
 

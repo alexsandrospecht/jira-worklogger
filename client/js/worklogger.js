@@ -21,6 +21,12 @@ Template.worklogger.helpers({
   }
 });
 
+Template.worklogger.onCreated(function() {
+  if (UserIssues && UserIssues !== 'null' && UserIssues !== 'undefined') {
+    loadUserIssues();
+  }
+});
+
 Template.worklogger.events({
   'click #enviar'(event) {
     var userLogin = Meteor.user().username;
