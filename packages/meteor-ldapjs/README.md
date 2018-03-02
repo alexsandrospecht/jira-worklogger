@@ -1,0 +1,1 @@
+Meteor package wrapper for the ldapjs Npm module https://www.npmjs.com/package/ldapjs
