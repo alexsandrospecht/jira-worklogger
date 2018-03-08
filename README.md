@@ -1,4 +1,4 @@
-jira-worklogger
+# jira-worklogger
 
 The best way to time-track on jira
 
