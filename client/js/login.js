@@ -4,30 +4,27 @@ import { Base64 } from 'meteor/ostrio:base64';
 UserIssues = {};
 
 loadUserIssues = function() {
-  // UserIssues = {
-  //   "Apple": null,
-  //   "Microsoft": null,
-  //   "Google": 'https://placehold.it/250x250'
-  // }
-  // TODO
-  console.log("call load");
 
-  Meteor.call('getUserIssues', UserBase.find({user: Meteor.user().username}).fetch()[0].base, (error, result) => {
-    if (error) {
-      console.log(error);
-    } else {
-      for (var k in result['data']['issues']) {
-        var issue = result['data']['issues'][k];
-        UserIssues[issue['key'] + " - " + issue['fields']['summary']] = null;
-      }
+  setTimeout(function () {
+    if (Meteor.user()) {
+      Meteor.call('getUserIssues', UserBase.find({user: Meteor.user().username}).fetch()[0].base, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          for (var k in result['data']['issues']) {
+            var issue = result['data']['issues'][k];
+            UserIssues[issue['key'] + " - " + issue['fields']['summary']] = null;
+          }
 
-      $('input.autocomplete').autocomplete({
-        data: UserIssues,
-        limit: 10,
-        minLength: 0,
+          $('input.autocomplete').autocomplete({
+            data: UserIssues,
+            limit: 10,
+            minLength: 0,
+          });
+        }
       });
     }
-  });
+  }, 1000);
 }
 
 Template.loginAccount.events({

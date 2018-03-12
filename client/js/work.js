@@ -92,30 +92,9 @@ Template.work.onRendered(function() {
     closeOnSelect: true
   });
 
-  console.log(UserIssues);
-
   $('input.autocomplete').autocomplete({
     data: UserIssues,
     limit: 10,
     minLength: 0,
   });
-
-  // Meteor.call('getUserIssues', UserBase.find({user: Meteor.user().username}).fetch()[0].base, (error, result) => {
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     var output = {};
-  //
-  //     for (var k in result['data']['issues']) {
-  //       var issue = result['data']['issues'][k];
-  //       output[issue['key'] + " - " + issue['fields']['summary']] = null;
-  //     }
-  //
-  //     $('input.autocomplete').autocomplete({
-  //       data: output,
-  //       limit: 10,
-  //       minLength: 0,
-  //     });
-  //   }
-  // });
 });
